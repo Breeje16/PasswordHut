@@ -32,7 +32,7 @@ contract PasswordHut {
     /**
      * @dev function to send all Credentials of a Particular User
      */
-    function getAllCredentials() public view returns (Credential[] memory){
+    function retrieveCredentials() public view returns (Credential[] memory){
         return credentials[msg.sender];
     }
 
