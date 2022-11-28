@@ -1,0 +1,32 @@
+specVersion: 0.0.5
+description: Decentralized Password Manager
+features:
+  - nonFatalErrors
+  - ipfsOnEthereumContracts
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: PasswordHut
+    network: mumbai
+    source:
+      address: "0xF54468269dD5A5bC6682E6e101bFCD55060044CE"
+      abi: PasswordHut
+      startBlock: 29342025
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Credential
+      abis:
+        - name: PasswordHut
+          file: ./abis/PasswordHut.json
+      eventHandlers:
+        - event: DeletedCredential(indexed address,uint256)
+          handler: handleDeletedCredential
+        - event: ExistingCredentialUpdated(indexed address,uint256,string)
+          handler: handleExistingCredentialUpdated
+        - event: NewCredentialAdded(indexed address,uint256,string)
+          handler: handleNewCredentialAdded
+      file: ./src/password-hut.ts

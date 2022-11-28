@@ -1,0 +1,10 @@
+type Credential @entity {
+  id: ID!
+  ipfsCID: String!
+  owner: Bytes!
+  credentialID: String!
+  encryptedCred: String!
+  encryptedKey: String!
+  status: Boolean!
+  timestamp: BigInt!
+}
